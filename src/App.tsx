@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useAppDispatch, useAppSelector } from './hooks';
+import { login, logout } from './userSlice';
 
 function App() {
+  const id = useAppSelector(state => state.user.id)
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    console.log(id)
+  }, [id])
+  useEffect(() => {
+    dispatch(login({
+      id: 456
+    }))
+    setTimeout(() => {
+      dispatch(logout())
+    }, 1000);
+  }, [])
   return (
     <div className="App">
       <header className="App-header">
